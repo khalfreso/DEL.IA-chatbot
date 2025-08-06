@@ -1,0 +1,41 @@
+# Entornos virtuales
+.venv/
+venv/
+rasa_env
+backend_env
+action_server_env
+envs
+
+# Archivos de Rasa
+models/
+.rasa/
+
+# Configuraciones locales
+.vscode/
+.env
+backend/.env
+
+# Archivos Python temporales
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.log
+*.pkl
+*.tmp
+*.bak
+
+# Ignorar todos los archivos .pkl excepto el modelo específico
+!chatbot/modelos/vectorizador_tfidf.pkl
+!chatbot/modelos/modelo_svm_final.pkl
+
+# Archivos basura de Mac
+.DS_Store
+
+# Carpeta de checkpoints o tensorboard
+checkpoints/
+tensorboard/
+
+# Ignorar documentos generados
+backend/docs/*.docx

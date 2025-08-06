@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- Idioma por defecto -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Título de la web -->
+  <title>DEL.IA Virtual Assistant</title>
+  <!-- Icono de la web -->
+  <link rel="icon" type="image/x-icon" href="images/fgris_mlila.PNG" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Fuentes de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Aquí se especifican las fuentes a usar, utilizando "family=xyz".
+    Se pueden añadir varias encadenando "family=xyz&family=zyx". Ver los códigos en Google Fonts - Embed code -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
+  rel="stylesheet">
+</head>
+
+<body>
+  <!-- Contenedor general de todos los elementos, equivale al rectángulo grande -->
+  <div class="base">
+    <!-- El área de la izquierda, contiene elementos de información descriptiva sobre el chatbot -->
+    <div class="barra-lateral">
+      <!-- Foto de perfil -->
+      <div class="foto-perfil">
+        <img id="perfil-img" src="images/DELIA_SALUDANDO-nobg.png" />
+      </div>
+      <!-- Título -->
+      <div class="titulo">DEL.IA</div>
+      <!-- Descripción de la izquierda-->
+      <div class="descripcion" id="descripcion1-bot">
+        DEL.IA is a virtual assistant that helps to detect and reduce unreported cases of hate in Spain. It listens to you, accompanies you and guides you on whether what you have experienced is a crime. In addition, you can access support services and receive a document that records your experience.
+      </div>
+      <br>
+      <div class="descripcion" id="descripcion2-bot">
+        This is a project developed by the students of LeIA. Find out more about us and our project on social media:
+      </div>
+      <!-- Imágenes e hipervínculos a las redes sociales. 
+        Target="_blank" hace que clicar abra una nueva página, en vez de reemplazar en la que estás -->
+      <div class="redes-sociales">
+        <a href="https://github.com/proyectoDELIA/DEL.IA-chatbot/" target="_blank">
+          <img class="dark-toggle-icon" src="images/github.svg"/>
+        </a>
+        <a href="https://www.linkedin.com/in/proyecto-delia-125b09359/" target="_blank">
+          <img class="dark-toggle-icon" src="images/linkedin.svg"/>
+        </a>
+        <a href="https://www.instagram.com/proyectodel.ia/" target="_blank">
+          <img class="dark-toggle-icon" src="images/instagram.svg"/>
+        </a>
+      </div>
+    </div>
+    <!-- Contenedor del chat -->
+    <div class="contenedor-general-chat">
+      <!-- Botón que abre el panel de ajustes -->
+      <div class="boton-ajustes" onclick="toggleSettings()">
+        <img class="dark-toggle-icon" src="images/gear.svg" alt="Settings" />
+      </div>
+      <!-- Panel de ajustes -->
+      <div class="panel-ajustes" id="panel-ajustes">
+        <!-- Botón de volumen -->
+        <button class="toggle-btn" id="mute-button">
+          <img class="dark-toggle-icon" src="images/volume-up.svg" style="width: 30px; height: 30px" />
+        </button>
+        <!-- Botón de modo oscuro -->
+        <button class="toggle-btn" onclick="toggleDarkMode()">
+          <img class="dark-toggle-icon" src="images/circle-half.svg" style="width: 30px; height: 30px" />
+        </button>
+      </div>
+      <!-- Chat que contiene los mensajes -->
+      <div class="ventana-chat" id="ventana-chat">
+        <div class="mensaje disclaimer" id="disclaimer">
+          This conversation is private. All information you share during this conversation will be treated in strict confidence and will be used for support purposes only. We do not collect personally identifiable information, your participation will remain anonymous.<br>
+          Any assessment made by DEL.IA regarding hate crimes is for guidance only and has no legal validity.
+        </div>
+        <!-- Mensaje inicial estático del bot. Cada nuevo mensaje se añadirá debajo de este -->
+        <div class="mensaje bot" id="mensaje-idioma">
+          <div id="seleccion-idioma">
+            Select your language:
+          </div>
+          <!-- Botón para seleccionar español -->
+          <button class="flag-button" onclick="setLanguageAndShowWelcome('es', this)">
+            <img src="images/spain.png" alt="Español" />
+          </button>
+          <!-- Botón para seleccionar francés -->
+          <button class="flag-button" onclick="setLanguageAndShowWelcome('fr', this)">
+            <img src="images/france.png" alt="Français" />
+          </button>
+          <!-- Botón para seleccionar inglés -->
+          <button class="flag-button" onclick="setLanguageAndShowWelcome('en', this)">
+            <img src="images/uk.png" alt="English" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Área de input del usuario -->
+      <div class="contenedor-input">
+        <!-- Input de audio, la imagen del botón cambia al iniciar la captura de audio -->
+        <button id="recordButton" class="input-button">
+          <img id="recordIcon" class="dark-toggle-icon" src="images/mic.svg" style="width: 25px; height: 25px" />
+        </button>
+        <!-- Placeholder de mensaje, desaparece al empezar a escribir -->
+        <textarea id="input" placeholder="Type a message..." rows="1"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Funciones JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>

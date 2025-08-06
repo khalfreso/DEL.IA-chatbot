@@ -1,0 +1,338 @@
+version: "3.1"
+
+stories:
+
+- story: define delito + pide recursos + testimonio
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - intent: delito_odio
+  - action: action_delito_odio
+  - intent: recursos_denuncia
+  - action: action_recursos_denuncia
+  - intent: testimonio
+  - action: utter_testimonio
+
+
+- story: pide recursos + define delito + testimonio
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - intent: recursos_denuncia
+  - action: action_recursos_denuncia
+  - intent: delito_odio
+  - action: action_delito_odio
+  - intent: testimonio
+  - action: utter_testimonio
+
+
+- story: define delito + testimonio directo
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - intent: delito_odio
+  - action: action_delito_odio
+  - intent: testimonio
+  - action: utter_testimonio
+
+
+- story: define delito + testimonio y lo rechaza
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - intent: delito_odio
+  - action: action_delito_odio
+  - intent: testimonio
+  - action: utter_testimonio
+
+
+- story: pide recursos + testimonio directo
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - intent: recursos_denuncia
+  - action: action_recursos_denuncia
+  - intent: testimonio
+  - action: utter_testimonio
+- story: toma testimonio abortada
+  steps:
+  - intent: testimonio
+  - action: utter_testimonio
+  - intent: niega
+  - action: utter_pedir_confirmacion
+  - intent: niega
+  - action: utter_despedida_concienciadora
+
+# Aquí se pide el perfil de la víctima
+
+- story: toma testimonio directa
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - intent: testimonio
+  - action: utter_testimonio
+  - intent: afirma
+  - action: utter_inform_perfil_victima1
+  - intent: inform_perfil_victima
+  - action: utter_inform_perfil_victima2
+  - intent: inform_grupo_victima
+  - action: utter_ubicar_medio
+
+
+- story: toma testimonio con duda
+  steps:
+  - intent: testimonio
+  - action: utter_testimonio
+  - intent: niega
+  - action: utter_pedir_confirmacion
+  - intent: afirma
+  - action: utter_inform_perfil_victima1
+  - intent: inform_perfil_victima
+  - action: utter_inform_perfil_victima2
+  - intent: inform_grupo_victima
+  - action: utter_ubicar_medio
+
+
+- story: en redes            #aquí empieza la ubicación de los hechos
+  steps:
+  - intent: inform_grupo_victima
+  - action: utter_ubicar_medio
+  - intent: inform_medio_digital
+  - action: utter_plataforma_redes
+  - intent: inform_plataforma_redes
+  - action: utter_fecha_redes
+  - intent: inform_fecha
+  - action: utter_num_agresores_redes
+- story: un agresor en redes
+  steps:
+  - intent: inform_fecha
+  - action: utter_num_agresores_redes
+  - intent: inform_num_agresores_redes
+  - action: utter_pregunta_cuenta_agresor_vinculacion_redes
+  - intent: inform_cuenta_agresor_vinculacion_redes
+  - action: utter_invita_relato_hechos
+  - intent: relato_hechos
+  - action: utter_invita_relato_adicional_motivacion
+  - intent: relato_adicional_hechos_motivacion
+  - action: utter_denuncia_hechos
+- story: varios agresores en redes
+  steps:
+  - intent: inform_fecha
+  - action: utter_num_agresores_redes
+  - intent: inform_num_agresores_redes_plural
+  - action: utter_pregunta_cuenta_agresores_vinculacion_redes
+  - intent: inform_cuenta_agresor_vinculacion_redes
+  - action: utter_invita_relato_hechos
+  - intent: relato_hechos
+  - action: utter_invita_relato_adicional_motivacion_plural
+  - intent: relato_adicional_hechos_motivacion
+  - action: utter_denuncia_hechos
+
+
+- story: en persona
+  steps:
+  - intent: inform_grupo_victima
+  - action: utter_ubicar_medio
+  - intent: inform_medio_fisico
+  - action: utter_pregunta_fecha_vida_real
+  - intent: inform_fecha
+  - action: utter_pregunta_localizacion
+  - intent: inform_localizacion
+  - action: utter_num_agresores_vida_real
+
+- story: un agresor en persona
+  steps:
+  - intent: inform_localizacion
+  - action: utter_num_agresores_vida_real
+  - intent: inform_num_agresores
+  - action: utter_invita_relato_hechos
+  - intent: relato_hechos
+  - action: utter_invita_relato_adicional_motivacion
+  - intent: relato_adicional_hechos_motivacion
+  - action: utter_relacion_agresor
+
+- story: varios agresores en persona
+  steps:
+  - intent: inform_localizacion
+  - action: utter_num_agresores_vida_real
+  - intent: inform_num_agresores_plural
+  - action: utter_invita_relato_hechos
+  - intent: relato_hechos
+  - action: utter_invita_relato_adicional_motivacion_plural
+  - intent: relato_adicional_hechos_motivacion
+  - action: utter_relacion_agresor_plural
+
+- story: no conoce al agresor
+  steps:
+  - intent: inform_descripcion
+  - action: utter_preguntar_descripcion_agresor
+  - intent: inform_descripcion
+  - action: utter_preguntar_caracteristicas_distintivas_grupo_odio
+  - intent: inform_descripcion
+  - action: utter_testigos
+
+- story: no conoce al agresor plural
+  steps:
+  - intent: inform_descripcion_plural
+  - action: utter_preguntar_descripcion_agresor_plural
+  - intent: inform_descripcion_plural
+  - action: utter_preguntar_caracteristicas_distintivas_grupo_odio_plural
+  - intent: inform_descripcion_plural
+  - action: utter_testigos
+
+- story: ha denunciado y quiere informe
+  steps:
+  - action: utter_denuncia_hechos
+  - slot_was_set:
+    - preguntando_denuncia: true
+  - intent: afirma
+  - action: action_resumen_y_clasificacion
+  - action: utter_recordatorio_redactar_informe
+  - intent: informe_si
+  - action: action_generar_informe
+  - action: utter_agradecer
+
+- story: ha denunciado y no quiere informe
+  steps:
+  - action: utter_denuncia_hechos
+  - slot_was_set:
+    - preguntando_denuncia: true
+  - intent: afirma
+  - action: action_resumen_y_clasificacion
+  - action: utter_recordatorio_redactar_informe
+  - intent: informe_no
+  - action: utter_informe_no
+  - action: utter_agradecer
+
+- story: no ha denunciado y quiere informe
+  steps:
+  - action: utter_denuncia_hechos
+  - slot_was_set:
+      - preguntando_denuncia: true
+  - intent: niega
+  - action: action_resumen_y_clasificacion
+  - action: utter_recordatorio_redactar_informe
+  - intent: informe_si
+  - action: action_generar_informe
+  - action: utter_agradecer_no_denuncia
+
+- story: no ha denunciado y no quiere informe
+  steps:
+  - action: utter_denuncia_hechos
+  - slot_was_set:
+      - preguntando_denuncia: true
+  - intent: niega
+  - action: action_resumen_y_clasificacion
+  - action: utter_recordatorio_redactar_informe
+  - intent: informe_no
+  - action: utter_informe_no
+  - action: utter_agradecer_no_denuncia
+
+# - story: ha denunciado
+#   steps:
+#   - action: utter_denuncia_hechos
+#   - intent: afirma
+#   - action: action_resumen_y_clasificacion
+
+
+# - story: no ha denunciado
+#   steps:
+#    - action: utter_denuncia_hechos
+#    - intent: niega
+#    - action: action_resumen_y_clasificacion
+
+# - story: informe_si
+#   steps:
+#   - action: action_resumen_y_clasificacion
+#   - action: utter_recordatorio_redactar_informe
+#   - intent: informe_si
+#   - action: utter_informe_si
+#   - action: action_generar_informe
+#   - action: utter_agradecer
+
+# - story: informe_no
+#   steps:
+#   - action: action_resumen_y_clasificacion
+#   - action: utter_recordatorio_redactar_informe
+#   - intent: informe_no
+#   - action: utter_informe_no
+#   - action: utter_agradecer
+
+
+
+# #STORY DE PRUEBA PARA GENERAR RESUMEN E INFORME CON UN CHAT DE EJEMPLO
+# - story: Generar informe
+#   steps:
+#   - intent: generar_informe
+#   - slot_was_set:
+#         - chat: >
+#             {"chat": [
+#                 {"role": "chatbot", "message": "Hola, lamento que estés pasando por esto. Estoy aquí para ayudarte. ¿Puedes contarme qué ha sucedido?"},
+#                 {"role": "victima", "message": "Hola… gracias por responder. Ayer por la noche fui atacado verbalmente y físicamente por un grupo de desconocidos."},
+#                 {"role": "chatbot", "message": "Lo siento mucho. ¿Podrías decirme tu edad, género y si perteneces a algún colectivo?"},
+#                 {"role": "victima", "message": "Tengo 26 años, soy un hombre gay y formo parte de un grupo de activismo LGTBIQ+."},
+#                 {"role": "chatbot", "message": "Entiendo. ¿Cuándo y dónde ocurrió el ataque?"},
+#                 {"role": "victima", "message": "Fue el 18 de marzo, alrededor de las 23:30, en una calle del centro de la ciudad, cerca de un bar LGTBIQ+."},
+#                 {"role": "chatbot", "message": "¿Podrías describirme lo que pasó, paso a paso?"},
+#                 {"role": "victima", "message": "Claro… Salía del bar con unos amigos cuando un grupo de tres chicos empezó a seguirnos. Uno de ellos gritó \"mira a estos maricones, seguro que van buscando problemas\". Intentamos ignorarlos, pero se acercaron más. Uno de ellos me empujó y me dijo \"deberíais desaparecer de aquí, dais asco\". Cuando intenté alejarme, me golpearon en el brazo y me tiraron al suelo."},
+#                 {"role": "chatbot", "message": "¿Conocías a los agresores?"},
+#                 {"role": "victima", "message": "No, no los había visto nunca."},
+#                 {"role": "chatbot", "message": "¿Recuerdas cómo eran físicamente o cómo iban vestidos?"},
+#                 {"role": "victima", "message": "Sí… Eran tres chicos, de unos 20-25 años, uno de ellos llevaba una chaqueta negra con un símbolo que me pareció de un grupo de ultraderecha. Otro tenía una gorra roja y el tercero iba con sudadera gris."},
+#                 {"role": "chatbot", "message": "¿Hubo testigos?"},
+#                 {"role": "victima", "message": "Sí, mis amigos vieron todo. También una pareja que pasaba por la calle."},
+#                 {"role": "chatbot", "message": "¿Alguien llamó a la policía?"},
+#                 {"role": "victima", "message": "Sí, un camarero del bar vio lo que pasaba y llamó. Cuando llegaron, los agresores ya se habían ido corriendo."},
+#                 {"role": "chatbot", "message": "¿Has denunciado el ataque?"},
+#                 {"role": "victima", "message": "Sí, fui a comisaría esta mañana y puse la denuncia."},
+#                 {"role": "chatbot", "message": "Hiciste bien en denunciar. No estás solo, hay organizaciones que pueden ayudarte y ofrecerte apoyo legal y psicológico. ¿Necesitas información sobre ellas?"},
+#                 {"role": "victima", "message": "Sí, por favor… Me vendría bien hablar con alguien."},
+#                 {"role": "chatbot", "message": "Claro. Te enviaré los datos de contacto de varias asociaciones que pueden ayudarte. También recuerda que puedes recibir asesoramiento legal gratuito. No estás solo en esto."},
+#                 {"role": "victima", "message": "Gracias… Me siento un poco mejor sabiendo que hay ayuda."}
+#             ]}
+#   - action: action_generar_resumen
+#   - action: action_generar_informe
+
+# # STORY SOLICITAR CLASIFICACION
+# - story: Ejemplo Clasificacion
+#   steps:
+#     - intent: solicitar_calificacion
+#     - slot_was_set:
+#         - chat: >
+#             {"chat": [
+#                 {"role": "chatbot", "message": "Hola, lamento que estés pasando por esto. Estoy aquí para ayudarte. ¿Puedes contarme qué ha sucedido?"},
+#                 {"role": "victima", "message": "Hola… gracias por responder. Ayer me pegaron por mi orientación sexual."},
+#                 {"role": "chatbot", "message": "Lo siento mucho. ¿Podrías decirme tu edad, género y si perteneces a algún colectivo?"},
+#                 {"role": "victima", "message": "Tengo 26 años, soy un hombre gay y formo parte de un grupo de activismo LGTBIQ+."},
+#                 {"role": "chatbot", "message": "Entiendo. ¿Cuándo y dónde ocurrió el ataque?"},
+#                 {"role": "victima", "message": "Fue el 18 de marzo, alrededor de las 23:30, en una calle del centro de la ciudad, cerca de un bar LGTBIQ+."},
+#                 {"role": "chatbot", "message": "¿Podrías describirme lo que pasó, paso a paso?"},
+#                 {"role": "victima", "message": "Claro… Salía del bar con unos amigos cuando un grupo de tres chicos empezó a seguirnos. Uno de ellos gritó \"mira a estos maricones, seguro que van buscando problemas\". Intentamos ignorarlos, pero se acercaron más. Uno de ellos me empujó y me dijo \"deberíais desaparecer de aquí, dais asco\". Cuando intenté alejarme, me golpearon en el brazo y me tiraron al suelo."},
+#                 {"role": "chatbot", "message": "¿Conocías a los agresores?"},
+#                 {"role": "victima", "message": "No, no los había visto nunca."},
+#                 {"role": "chatbot", "message": "¿Recuerdas cómo eran físicamente o cómo iban vestidos?"},
+#                 {"role": "victima", "message": "Sí… Eran tres chicos, de unos 20-25 años, uno de ellos llevaba una chaqueta negra con un símbolo que me pareció de un grupo de ultraderecha. Otro tenía una gorra roja y el tercero iba con sudadera gris."},
+#                 {"role": "chatbot", "message": "¿Hubo testigos?"},
+#                 {"role": "victima", "message": "Sí, mis amigos vieron todo. También una pareja que pasaba por la calle."},
+#                 {"role": "chatbot", "message": "¿Alguien llamó a la policía?"},
+#                 {"role": "victima", "message": "Sí, un camarero del bar vio lo que pasaba y llamó. Cuando llegaron, los agresores ya se habían ido corriendo."},
+#                 {"role": "chatbot", "message": "¿Has denunciado el ataque?"},
+#                 {"role": "victima", "message": "Sí, fui a comisaría esta mañana y puse la denuncia."},
+#                 {"role": "chatbot", "message": "Hiciste bien en denunciar. No estás solo, hay organizaciones que pueden ayudarte y ofrecerte apoyo legal y psicológico. ¿Necesitas información sobre ellas?"},
+#                 {"role": "victima", "message": "Sí, por favor… Me vendría bien hablar con alguien."},
+#                 {"role": "chatbot", "message": "Claro. Te enviaré los datos de contacto de varias asociaciones que pueden ayudarte. También recuerda que puedes recibir asesoramiento legal gratuito. No estás solo en esto."},
+#                 {"role": "victima", "message": "Gracias… Me siento un poco mejor sabiendo que hay ayuda."}
+#             ]}
+#     - action: action_generar_resumen
+#     - action: action_clasificar_discurso_odio
+
+# - story: Clasificar discurso de odio
+#   steps:
+#     - intent: solicitar_calificacion
+#     - action: action_generar_resumen
+#     - action: action_clasificar_discurso_odio
+
+
+
+
+

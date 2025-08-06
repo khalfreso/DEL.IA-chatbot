@@ -1,0 +1,527 @@
+version: "3.1"
+
+intents:
+  - iniciar_sesion
+  - delito_odio
+  - recursos_denuncia
+  - testimonio
+  - despedida
+  - afirma
+  - niega
+  - desafio_bot
+  - inform_perfil_victima
+  - inform_grupo_victima
+  - inform_medio_digital
+  - inform_medio_fisico
+  - inform_plataforma_redes
+  - inform_fecha
+  - inform_num_agresores
+  - inform_num_agresores_redes
+  - inform_num_agresores_plural
+  - inform_num_agresores_redes_plural
+  - inform_cuenta_agresor_vinculacion_redes
+  - relato_hechos
+  - relato_adicional_hechos_motivacion
+  - inform_localizacion
+  - inform_descripcion_plural
+  - informe_si
+  - informe_no
+  - solicitar_calificacion
+  - inform_descripcion
+  - no_quiero_responder
+  - Comunidad_Madrid
+  - Castilla_Leon
+  - Galicia
+  - Andalucia
+  - Valencia
+  - Canarias
+  - Cataluña
+  - no_recursos
+  - agradecer
+  - pregunta_proposito
+  - pregunta_fuera_dominio
+ 
+
+entities:
+  - nombre_victima
+  - edad_victima
+  - genero_victima
+  - nacionalidad_victima
+  - colectivo_victima
+  - medio_digital
+  - plataforma_redes
+  - num_agresores
+  - cuenta_agresor_redes
+  - vinculacion_extremista_agresor_redes
+  - localizacion
+  - nombre_agresor
+  - localizacion_agresor
+  - simbolismo
+  - caracteristicas_distintivas
+  - grupo_odio
+  - testigos
+  - relacion_testigo
+  - estado_denuncia
+  - redactar_informe
+  
+slots:
+  
+  chat: #PARA GENERACIÓN DEL INFORME
+    type: text
+    mappings:
+      - type: custom
+  
+  resumen_es: #PARA GENERACIÓN DEL INFORME
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  nombre_victima:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: nombre_victima
+    influence_conversation: true
+  
+  edad_victima:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: edad_victima
+
+  genero_victima:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: genero_victima
+
+  nacionalidad_victima:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: nacionalidad_victima
+
+  colectivo_victima:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: colectivo_victima
+
+  plataforma_redes:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: plataforma_redes
+
+  tipo_fecha:
+    type: categorical
+    values:
+      - redes
+      - persona
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  localizacion:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  
+  nombre_agresor:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: nombre_agresor
+    influence_conversation: true
+
+
+  localizacion_agresor:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: localizacion
+    influence_conversation: true
+
+  simbolismo:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: simbolismo
+    influence_conversation: true
+
+  caracteristicas_distintivas:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: caracteristicas_distintivas
+    influence_conversation: true
+  
+  grupo_odio:
+    type: list
+    mappings:
+    - type: from_entity
+      entity: grupo_odio
+    influence_conversation: true
+
+  recopilando_info_agresor:
+    type: bool
+    mappings:
+    - type: from_text
+    influence_conversation: true
+
+  
+  testigos_presencia:
+    type: categorical
+    values:
+      - sí
+      - no
+    mappings:
+      - type: from_entity
+        entity: testigos
+    influence_conversation: true
+
+  rol:
+    type: categorical
+    values:
+      - agresor
+      - testigo
+    influence_conversation: true
+    mappings:
+      - type: custom
+  num_agresores:
+    type: categorical
+    values:
+      - uno  # redes
+      - varios   # en persona
+    influence_conversation: true
+    mappings:
+      - type: custom
+  
+  
+  medio:
+    type: categorical
+    values:
+      - digital  # redes
+      - fisico   # en persona
+    influence_conversation: true
+    mappings:
+      - type: from_text
+      - type: from_intent
+        intent: inform_medio_digital
+        value: digital
+      - type: from_intent
+        intent: inform_medio_fisico
+        value: fisico
+        
+  preguntando_denuncia:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: from_intent
+        intent: afirma
+        value: true
+      - type: from_intent
+        intent: niega
+        value: false
+  
+      
+
+responses:
+  utter_saludo:
+  - text: "Hola de nuevo. ¿En qué puedo ayudarte esta vez?"
+
+  utter_despedida:
+  - text: "Ha sido un placer poder acompañarte, {nombre_victima}. No olvides que, si me necesitas otra vez, estaré disponible para ti en cualquier momento. ¡Y, por cierto! No dudes en hablarle de mí a otras personas que puedan haber pasado o estén pasando por una situación similar. Contarlo y actuar puede cambiar mucho las cosas."
+
+  utter_soydelia:
+  - text: "Soy un bot, hecho con Rasa. Mi propósito es acompañar a personas que han podido ser víctimas de delitos de odio, ofreciéndoles un espacio seguro donde poder contar lo sucedido y poniendo a su alcance diferentes recursos dependiendo de sus necesidades."
+  
+
+  utter_testimonio:
+  - text: "Hablar de ello es el primer paso para que se haga justicia. Durante este proceso te haré algunas preguntas personales para crear un informe detallado y ayudarte a entender si lo que has vivido se trata de un delito de odio.
+      Es importante tener en cuenta que cuanta más información me des, más fácil será poder ayudarte, pero no tienes por qué contestar a todo.
+      Tu espacio y tu seguridad son lo más importante, por eso, esta conversación no quedará registrada en ningún lado.
+      ¿Quieres que empecemos el cuestionario? Solo te llevará unos 10 minutos."
+
+  utter_pedir_confirmacion:
+  - text: "Entiendo, y está bien decir que no. Solo por si acaso, quiero que sepas que puede ser la forma de recibir un acompañamiento más ajustado a lo que necesitas, sin juzgarte y siempre con total confidencialidad. Tú decides el ritmo, ¿te animas a intentarlo?"
+
+  utter_despedida_concienciadora:
+  - text: "De acuerdo, podemos hablar en otro momento. Aun así, recuerda de que todas las personas merecen ser respetadas tal y como son.
+       ¡Y, por cierto! No dudes en hablarle de mí a otras personas que puedan haber pasado o estén pasando por una situación similar. Contarlo y actuar puede cambiar mucho las cosas. Estoy aquí siempre que me necesites."
+
+  utter_inform_perfil_victima1:
+  - text: "Genial, antes de que me cuentes lo que ha pasado necesito conocerte mejor. ¿Podrías decirme tu nombre, edad, género y nacionalidad? "
+
+  utter_inform_perfil_victima2:
+  - text: "Gracias por la información, {nombre_victima}. Entender con qué grupo social te identificas puede ayudarme a comprender mejor lo que pasó.
+       ¿Te reconoces como LGTBIQ+, formas parte de una comunidad religiosa o de algún otro colectivo que sea importante para ti?"
+  - text: "Gracias por la información, {nombre_victima}. ¿Te sientes parte de alguna comunidad, etnia o grupo, como por ejemplo LGTBIQ+, una comunidad religiosa u otro colectivo que pueda ser importante para lo sucedido? Esto me puede ayudar a entender mejor tu situación."
+
+  utter_ubicar_medio:
+  - text: "¿El incidente sucedió a través de internet o en un lugar físico?"
+    buttons:
+      - title: "A través de internet"
+        payload: /inform_medio_digital
+      - title: "En persona"
+        payload: /inform_medio_fisico
+
+  utter_plataforma_redes: 
+  - text: "¿Podrías decirme en qué red o redes ocurrieron los hechos?"
+  - text: "¿En qué redes sociales tuvo lugar lo sucedido?"
+  - text: "¿A través de qué espacio digital sucedió el incidente?"
+
+  utter_fecha_redes: 
+  - text: "¿Cuándo ocurrió lo sucedido? Puede ser una fecha y hora específicos o un período aproximado."
+  - text: "¿En qué fecha o período tuvo lugar lo que pasó en redes? Si no lo recuerdas bien puedes darme datos aproximados."
+
+  utter_num_agresores_redes: 
+  - text: "¿Fueron una o varias las cuentas que participaron en lo sucedido?"
+    buttons:
+      - title: "Fue una cuenta solamente"
+        payload: /inform_num_agresores_redes
+      - title: "Fueron varias cuentas"
+        payload: /inform_num_agresores_redes_plural
+
+  utter_pregunta_cuenta_agresor_vinculacion_redes:
+  - text: "¿Recuerdas el nombre de usuario, correo o perfil del agresor en la red social? (ej: @usuario, nombre en Facebook...) Si no te acuerdas no pasa nada, pero quizás puedas compartir detalles que son muy útiles para mí, por ejemplo: ¿sabías si esta cuenta seguía o estaba vinculada a grupos o páginas con ideologías de odio o compartía contenido de odio?"
+  - text: "¿Recuerdas el nombre de usuario, correo o perfil del agresor en la red social? (ej: @usuario, nombre en Facebook...) Si no te acuerdas no pasa nada, pero quizás puedas compartir detalles que son muy útiles para mí, por ejemplo: a veces los perfiles comparten contenido o usan imágenes de perfil o nombres relacionados con grupos extremistas. ¿Viste algo así?"
+
+  utter_pregunta_cuenta_agresores_vinculacion_redes:
+  - text: "¿Recuerdas los nombres de usuario, correos o perfiles de los agresores en la red social? (ej: @usuario, nombre en Facebook...) Si no te acuerdas no pasa nada, pero quizás puedas compartir detalles que son muy útiles para mí, por ejemplo: ¿sabías si estas cuentas seguían o estaban vinculadas a grupos o páginas con ideologías de odio o compartían contenido de odio?"
+  - text: "¿Recuerdas los nombres de usuario, correos o perfiles de los agresores en la red social? (ej: @usuario, nombre en Facebook...) Si no te acuerdas no pasa nada, pero quizás puedas compartir detalles que son muy útiles para mí, por ejemplo: a veces los perfiles comparten contenido o usan imágenes de perfil o nombres relacionados con grupos extremistas. ¿Viste algo así?"
+
+  utter_invita_relato_hechos:
+  - text: "Cuando quieras puedes empezar a contarme lo que te ha pasado. Para que todo sea más fácil, trata de seguir el orden en que ocurrió el incidente y, si puedes, reproduce mensajes o imágenes tal como las recuerdas."
+  - text: "Este es un espacio seguro. Puedes contar todo lo que recuerdes sobre el incidente. Será todo más fácil si me lo cuentas en orden, incluyendo los mensajes o publicaciones, y describiendo cualquier contenido que te parezca relevante."
+
+  utter_invita_relato_adicional_motivacion:
+  - text: "Gracias por compartir todo esto conmigo. Si hay algo más que recuerdes y te gustaría añadir, puedes hacerlo ahora. \n
+          Antes de que continuemos, me gustaría hacerte una pregunta más. ¿Crees que hubo algún motivo detrás de la agresión o el comportamiento de esa persona?"
+  - text: "Lo que has contado hasta ahora es importante. Si sientes que quedó algo fuera o recuerdas algún otro detalle, puedes compartirlo ahora. \n  
+          Me gustaría preguntarte una cosa antes de que continuemos. ¿Te parece que había alguna razón específica por la que el agresor actuó así? "
+  - text: "Agradezco que hayas compartido tu relato. Si se te ocurre algo más que quieras contar, puedes añadirlo ahora. \n  
+          Me gustaría preguntarte una cosa antes de que continuemos. ¿Te parece que había alguna razón específica por la que el agresor actuó así?"
+
+  utter_invita_relato_adicional_motivacion_plural:
+  - text: "Gracias por compartir todo esto conmigo. Si hay algo más que recuerdes y te gustaría añadir, puedes hacerlo ahora. \n
+          Antes de que continuemos, me gustaría hacerte una pregunta más. ¿Crees que hubo algún motivo detrás de la agresión o el comportamiento de esas personas?"
+
+  - text: "Lo que has contado hasta ahora es importante. Si sientes que quedó algo fuera o recuerdas algún otro detalle, puedes compartirlo ahora. \n
+          Me gustaría preguntarte una cosa antes de que continuemos. ¿Te parece que había alguna razón específica por la que los agresores actuaron así?"
+
+  - text: "Agradezco que hayas compartido tu relato. Si se te ocurre algo más que quieras contar, puedes añadirlo ahora. \n
+           Me gustaría preguntarte una cosa antes de que continuemos. ¿Te parece que había alguna razón específica por la que los agresores actuaron así?"
+
+
+  utter_pregunta_localizacion:
+  - text: "¿Puedes decirme el lugar o la zona donde ocurrió? Por ejemplo  la calle, local o si era algún sitio con un valor simbólico." 
+
+  utter_pregunta_fecha_vida_real:
+  - text: "¿Me podrías decir cuándo ocurrió esto? Sería de gran ayuda si pudieras especificar el día y la hora a la que sucedió."
+  - text: "¿Recuerdas el día exacto y la hora en que sucedió el incidente? Si lo compartes conmigo podremos contextualizar mejor todo lo que pasó."
+
+  utter_num_agresores_vida_real: 
+  - text: "¿Fue una sola persona o varias actuando juntas?"
+    buttons:
+      - title: "Fue solamente una persona"
+        payload: /inform_num_agresores
+      - title: "Fueron varias personas"
+        payload: /inform_num_agresores_plural
+
+  utter_relacion_agresor:     
+  - text: "¿Conoces o identificas a la persona que actuó como agresor? Es decir, ¿tenías una relación previa con el agresor? ¿Había algún amigo, familiar, compañero de trabajo o, por el contrario, hablamos de un desconocido?"
+
+  utter_relacion_agresor_plural:     
+  - text: "¿Conoces o identificas a las personas que actuaron como agresores? Es decir, ¿tenías una relación previa con los agresores? ¿Había algún amigo, familiar, compañero de trabajo o, por el contrario, hablamos de desconocidos?"
+
+  utter_preguntar_detalles_iniciales_unico:
+  - text: "Para poder continuar ayudándote en este proceso voy a hacerte unas preguntas sobre el agresor. Recuerda que puedes compartir solo lo que te sientas cómodo/a mencionando, pero ten en cuenta que estas preguntas son muy útiles a la hora de poder estar más seguros sobre si se trata de un delito de odio o, por el contrario, hablamos de otro tipo de ofensa o delito. Para empezar, ¿podrías compartir el nombre o el apodo de esa persona, si lo conoces, y la edad o una aproximación?"
+ 
+  utter_preguntar_detalles_iniciales_plural:
+  - text: "Para poder continuar ayudándote en este proceso voy a hacerte unas preguntas sobre los agresores. Recuerda que puedes compartir solo lo que te sientas cómodo/a mencionando, pero ten en cuenta que estas preguntas son muy útiles a la hora de poder estar más seguros sobre si se trata de un delito de odio o, por el contrario, hablamos de otro tipo de ofensa o delito. Para empezar, ¿podrías compartir los nombres o los apodos de las personas, si las conoces, y la edad o una aproximación?"
+ 
+  utter_preguntar_descripcion_agresor:
+  - text: "¿Ahora me podrías decir cómo era físicamente, si lo recuerdas? Cualquier detalle puede ser útil: pelo, complexión, altura, ropa... Además, es especialmente útil que me digas si llevaba tatuajes o algún símbolo que pudiera estar relacionado con el delito."
+  
+  utter_preguntar_descripcion_agresor_plural:
+  - text: "¿Ahora me podrías decir cómo eran físicamente, si lo recuerdas? Cualquier detalle puede ser útil: pelo, complexión, altura, ropa... Además, es especialmente útil que me digas si llevaban tatuajes o algún símbolo que pudiera estar relacionado con el delito."
+
+  utter_preguntar_caracteristicas_distintivas_grupo_odio:
+  - text: "¿Hay algo más que quieras añadir sobre esta persona? (vestimenta, acento, cicatrices, piercings...). 
+            Cualquier otro detalle, por pequeño que sea, podría ayudar. Antes de acabar con esta parte, me gustaría hacerte una pregunta más. ¿Sabes si esa persona estaba vinculada a algún grupo con ideologías de odio o ha mostrado con anterioridad otros actos de odio en persona o redes hacia alguien?"
+  - text: "Si hay algo más que quieras añadir sobre esta persona este es el momento (vestimenta, acento, cicatrices, piercings...). 
+            Cualquier otro detalle, por pequeño que sea, podría ayudar. Antes de continuar, tengo una última pregunta sobre el agresor. ¿Sabes si esta persona ya había actuado así con otras personas o pertenecía a algún grupo con ideologías de odio?"
+
+  utter_preguntar_caracteristicas_distintivas_grupo_odio_plural:
+  - text: "¿Hay algo más que quieras añadir sobre estas personas? (vestimenta, acento, cicatrices, piercings...). 
+            Cualquier otro detalle, por pequeño que sea, podría ayudar. Antes de acabar con esta parte, me gustaría hacerte una pregunta más. ¿Sabes si esas personas estaban vinculadas a algún grupo con ideologías de odio o han mostrado con anterioridad otros actos de odio en persona o redes hacia alguien?"
+  - text: "Si hay algo más que quieras añadir sobre estas personas este es el momento (vestimenta, acento, cicatrices, piercings...). 
+            Cualquier otro detalle, por pequeño que sea, podría ayudar. Antes de continuar, tengo una última pregunta sobre los agresores. ¿Sabes si estas personas ya habían actuado así con otras personas o pertenecían a algún grupo con idelogías de odio?"
+
+  utter_testigos:
+  - text: "De acuerdo, esta información es muy valiosa. Continuemos. A veces, en estas situaciones hay personas que han presenciado lo ocurrido y que pueden apoyar tu versión. ¿Sabes si había alguien presente durante el incidente que pudiera ver u oír lo que sucedió?" 
+
+  utter_relacion_testigo:
+  - text: "Perfecto. ¿Conoces a alguien que fuese testigo de lo que pasó en ese momento? Es decir, ¿había algún amigo, familiar, compañero de trabajo o, por el contrario, hablamos de desconocidos?"
+
+  utter_info_testigos:
+  - text: "Los testigos son una parte muy importante en procesos como este porque pueden aportar información que respalde tu versión de los hechos. Por eso, necesitamos detalles, por pequeños que sean, para ayudar a las autoridades a localizarlos. ¿Me podrías dar una descripción física de esa persona, o algún dato relevante como, por ejemplo, dónde se encontraba en el momento del incidente? ¿Estaba cerca de ti o lejos? ¿Qué hacía mientras pasaba este acontecimiento? ¿Trabajaba en el lugar donde sucedió todo?  Cualquier cosa que recuerdes, aunque no aparezca en estas preguntas, es útil."
+
+  utter_denuncia_hechos:
+  - text: "Gracias por haber compartido conmigo toda esta información, es muy valiosa. Ahora, para poder orientarte mejor, es importante saber si ya hay un proceso legal en curso. ¿Estos hechos ya han sido denunciados ante alguna autoridad u organismo oficial?"
+  
+  utter_recordatorio_redactar_informe:
+  - text: "Estupendo. Ahora es primordial que conserves cualquier prueba que tengas: mensajes, fotos, capturas de pantalla, audios… Podrían ser útiles si decides denunciar. Antes de terminar con nuestra conversación, me gustaría ofrecerte un resumen estructurado con todo lo que me has contado. Este documento podría servirte si decides dar un paso más y denunciar. ¿Te gustaría que lo prepare para que te lo puedas descargar y así ves el resultado?"
+    buttons:
+      - title: "Sí"
+        payload: "/informe_si"
+      - title: "No"
+        payload: "/informe_no"
+  
+  utter_agradecer:
+  - text: "Agradezco mucho que hayas compartido tu relato de los hechos conmigo. Sé que no siempre es fácil hacerlo, pero este es un paso muy importante para conseguir justicia."
+  - text: "Gracias por tomarte el tiempo necesario y confiar en este espacio. Has compartido información muy importante, lo que es igual a dar un gran paso hacia adelante."
+  
+  utter_agradecer_no_denuncia:
+  - text: "Agradezco mucho que hayas compartido tu relato de los hechos conmigo. Sé que no siempre es fácil hacerlo, pero este es un paso muy importante para conseguir justicia. No quiero despedirme sin antes ofrecerte algunos recursos que podrían serte de gran ayuda. En estas delegaciones de Diaconía encontrarás apoyo humano, como abogados, psicólogos y trabajadores sociales, que pueden escucharte, orientarte y explicarte los pasos a seguir teniendo en cuenta tu situación. Selecciona la comunidad que te quede más cerca para ver los datos de contacto:"
+    buttons:
+      - title: "Comunidad de Madrid"
+        payload: "/Comunidad_Madrid"
+      - title: "Castilla y León"
+        payload: "/Castilla_Leon"
+      - title: "Galicia"
+        payload: "/Galicia"
+      - title: "Andalucía"
+        payload: "/Andalucia"
+      - title: "Comunidad Valenciana"
+        payload: "/Valencia"
+      - title: "Islas Canarias"
+        payload: "/Canarias"
+      - title: "Cataluña"
+        payload: "/Cataluña"  
+      - title: "No necesito recursos"
+        payload: "/no_recursos"  
+ 
+ 
+  utter_comunidad_madrid:
+  - text: |
+        Delegaciones de Diaconía en la Comunidad de Madrid*:
+        📍 Sede Central  
+        Dirección: C/ Andrés Obispo, 37, 7º Izquierda, 28043 Madrid  
+        Teléfono: 91 764 32 69
+        📍 Sede de Alameda del Valle  
+        Dirección: C/ Grande, 34, 28479 Alameda del Valle  
+        Teléfono: 918 690 055
+        Correo: denuncias@diaconiamadrid.org
+ 
+  utter_castilla_leon:
+  - text: |
+        Delegaciones de Diaconía en Castilla y León*:
+        📍 Sede provincial 
+        Dirección: Av. de Nocedo, 4, entreplanta, 24007 León  
+        Teléfono: 987 041 436
+        📍 Centro de Protección Internacional  
+        Dirección: C/ Juan Carlos León I, 5, 24227 Valdefresno, León  
+        Teléfono: 987 539 035
+        Correo: denuncias@diaconiamadrid.org
+ 
+  utter_galicia:
+  - text: |
+        Delegación de Diaconía en Galicia:
+        📍 Sede de Lugo  
+        Dirección: Rúa Alcalde Ramiro Rueda, nº 10, 27297 Lugo  
+        Teléfono: 982 603 063
+        Correo: denuncias@diaconiamadrid.org
+ 
+  utter_andalucia:
+  - text: |
+        Delegaciones de Diaconía en Andalucía:
+        📍 Sede de Málaga
+        Dirección: Av. de Andalucía, 27, Piso 1º, Despacho 17, 29007 Málaga  
+        Teléfono: 952 002 057
+        📍 Sede de Jaén (Mengíbar) 
+        Dirección: C/ Miguel López Moral 47, 23620 Mengíbar  
+        Teléfono: 665 328 272
+        📍 Sede de Cádiz (Puerto de Santa María) 
+        Dirección: C/ Virgen de los Milagros, 45, 11500 El Puerto de Santa María  
+        Teléfono: 956 974 520
+        📍 Jerez de la Frontera
+        Dirección: C/ Divina Pastora, 1, bajo, 11402  
+        Teléfono: 856 045 980
+        Correo: denuncias@diaconiamadrid.org
+ 
+  utter_comunidad_valenciana:
+  - text: |
+        Delegación de Diaconía en la Comunidad Valenciana:
+        📍 Sede de Castellón de la Plana
+        Dirección: C/ Manuel Segarra Ribes, 1, Pt 03, 12005 Castellón  
+        Teléfono: 687 179 993
+        Correo: denuncias@diaconiamadrid.org
+ 
+  utter_islas_canarias:
+  - text: |
+        Delegación de Diaconía en las Islas Canarias:
+        📍 Sede de Tenerife 
+        Dirección: Av. Islas Canarias, 31, local, 38007 Santa Cruz de Tenerife
+        Teléfono: 641 009 053
+        Correo: denuncias@diaconiamadrid.org
+ 
+  utter_cataluna:
+  - text: |
+        Delegación de Diaconía en Cataluña:
+        📍 Sede de Barcelona
+        Dirección: C/ Avall, 1, 08350 Arenys de Mar  
+        Teléfono: 691 264 147
+        Correo: denuncias@diaconiamadrid.org
+
+  utter_informe_si:
+  - text: "Perfecto, dentro de unos segundos estará listo para que te lo puedas descargar."
+
+  utter_informe_no:
+  - text: "Está bien, no es una cosa que sea obligatoria. De todas formas, si cambias de idea más adelante, puedo ayudarte a generarlo."
+
+
+  utter_generar_informe_ofrecimiento: #PARA GENERACIÓN DEL INFORME
+  - text: "Gracias por compartir todo esto conmigo. ¿Quieres que prepare un resumen con lo que me has contado para que puedas guardarlo como documento?"
+    buttons:
+      - title: "Sí, por favor"
+        payload: "/informe_si"
+      - title: "No, gracias"
+        payload: "/informe_no"
+  
+  utter_proposito_cuestionario:
+  - text: "Este cuestionario se ha creado teniendo en cuenta factores que me ayudan a entender si has vivido una situación que podría ser un delito de odio. Todo esto me sirve para saber cómo poder guiarte y qué tipo de apoyo podrías necesitar. Sin embargo, si en algún momento prefieres no contestar a una pregunta, podemos seguir adelante con el cuestionario sin ningún problema. Ahora que hemos aclarado el fin de este cuestionario, ¿quieres responder a la anterior pregunta o continuar con la siguiente?"
+ 
+
+  utter_entiendo:
+  - text: "Entiendo, no pasa nada. Seguimos con el cuestionario."
+
+actions:
+  - accion_inicio_sesion
+  - action_delito_odio
+  - action_recursos_denuncia
+  - action_generar_resumen #PARA GENERACIÓN DEL INFORME
+  - action_generar_informe #PARA GENERACIÓN DEL INFORME
+  - action_extraer_chat_json #PARA GENERACIÓN DEL INFORME
+  - action_preguntar_detalles_agresor
+  - action_clasificar_discurso_odio
+  - action_resumen_y_clasificacion
+  - action_esperar
+  - action_set_rol_agresor
+  - action_set_rol_testigo
+  - action_set_tipo_redes
+  - action_set_tipo_persona
+  - action_no_responde
+  - action_fallback_con_reintento
+
+session_config:
+  session_expiration_time: 15
+  carry_over_slots_to_new_session: true
+
+
+
+

@@ -1,0 +1,812 @@
+version: "3.1"
+
+nlu:
+
+- intent: delito_odio
+  examples: |
+   - Quiero entender mejor qué se considera un delito de odio
+   - Ayudarme a entender qué es un delito de odio
+   - Necesito saber que se entiende como un delito de odio
+
+
+- intent: recursos_denuncia
+  examples: |
+   - Quiero saber dónde y cómo puedo denunciar
+   - Contarme cómo y dónde denunciar
+   - Dame más información sobre como y donde denunciar
+
+
+- intent: testimonio
+  examples: |
+   - Quiero contar lo que me pasó y recibir ayuda personalizada
+   - Acompañarme en función de mi historia
+   - Hablar de lo que ha pasado
+   - necesito aportar mi testimonio
+
+
+
+- intent: despedida
+  examples: |
+    - adiós
+    - adios
+    - hasta luego
+    - hasta mañana
+    - hasta pronto
+    - hasta la próxima
+    - nos vemos
+    - chao
+    - chau
+    - bye
+    - buenas noches
+    - que descanses
+    - cuídate
+    - me voy, gracias
+    - gracias por todo, adiós
+    - hablamos luego
+    - hablamos otro día
+    - me piro vampiro
+    - cierro sesión
+    - cierro esto ya
+    - un placer
+    - gracias por la ayuda, hasta otra
+    - hasta otra
+
+
+- intent: afirma
+  examples: |
+   - sí
+   - si
+   - s
+   - claro
+   - desde luego
+   - si, quiero contarlo
+   - sí, quiero contarlo
+   - me encantaría
+   - genial
+   - perfecto
+   - adelante
+   - yes
+   - con mucho gusto
+   - venga
+   - vamos allá
+   - estoy lista
+   - vale
+   - okay
+   - ok
+   - lo voy a intentar
+   - está bien, lo voy a decir
+   - voy a tratar de explicarlo
+   - estoy lista para hablar
+   - Sí, por favor
+   - Claro, adelante
+   - Me gustaría que lo hicieras
+   - Perfecto, hazlo
+   - Sí, quiero el documento
+   - Sí, gracias
+   - Sí, ya he denunciado
+   - Sí, había testigos
+   - [Sí], [había dos chicas viéndolo] (testigos)
+   - Si [creo que un señor mayor lo vio] (testigos), pero no estoy seguro.
+   - Si [había un grupo de gente] (testigos), pero no se metieron
+   - [Sí, había alguien](testigos)
+   - [Sí, lo denuncié en la comisaría la semana pasada] (estado_denuncia)
+   - Si, era mi [compañero de clase] (relacion_testigo)
+   - Sí, uno era el [dueño de la tienda](relacion_testigo) donde pasó.
+   - si era el [dueño del kiosko](relacion_testigo) donde pasó todo.
+   - sí [una señora que vive en mi edificio](relacion_testigo)
+   - sí [un repartidor](relacion_testigo) que estaba pasando por ahí.
+   - por supuesto, era Luis, mi vecino
+   - Claro, eran Juan y Paco
+   - Sí, empecemos
+   - Sí, quiero comenzar el cuestionario
+   
+
+
+- intent: niega
+  examples: |
+   - no
+   - n
+   - no estoy segura
+   - no, prefiero no hablar de ello
+   - no creo
+   - no sé
+   - no se
+   - quizás
+   - debería?
+   - no lo tengo claro
+   - no me apetece
+   - me da vergüenza
+   - es que me da mucha verguenza
+   - no es el momento
+   - no tengo tiempo
+   - es muy largo
+   - paso
+   - ahora no
+   - mejor no
+   - no me siento listo para contarlo
+   - no me interesa
+   - tal vez después
+   - me cuesta hablarlo
+   - creo que no estoy preparada
+   - tengo dudas
+   - No, gracias
+   - Prefiero que no
+   - Ahora no lo necesito
+   - Mejor no
+   - No hace falta
+   - [No he denunciado](estado_denuncia)
+   - [No había testigos](testigos)
+   - [No](testigos), [solo estaba yo] (testigos)
+   - [Estaba solo](testigos)
+   - [No había nadie] (testigos)
+   - [No, no he ido aún] (estado_denuncia)
+   - [No los conocía](relacion_testigo)
+   - [No lo conocía](relacion_testigo)
+   - [No, eran gente que pasaba por la calle](relacion_testigo)
+   - [No los conocía](relacion_testigo), eran turistas con mochilas.
+   - Eran desconocidos
+   - No conocía a ninguno
+   - No conocia a ninguno
+
+
+- intent: inform_perfil_victima
+  examples: |
+   - Me llamo [Andrea](nombre_victima), tengo [22](edad_victima) años, soy una [mujer](genero_victima) y soy [española](nacionalidad_victima)
+   - Soy [David](nombre_victima) y soy [menor](edad_victima) de edad
+   - [Alex](nombre_victima), no [binarie](genero_victima), tengo [27] años y soy de [barcelona](nacionalidad_victima)
+   - Prefiero que me llames [Juan](nombre_victima), tengo ya los [cuarenta](edad_victima) y soy un [hombre](genero_victima) de [Argentina](nacionalidad_victima)
+   - Mi nombre es [María](nombre_victima), tengo [24](edad_victima), soy una [chavala](genero_victima) y soy [cubana](nacionalidad_victima)
+   - Digamos que me llamo [Pablo](nombre_victima), tengo [18] años y soy [gallego](nacionalidad_victima)
+   - [Julia](nombre_victima), [15] años, soy de [Madrid](nacionalidad_victima)
+   - Puedes decirme [Dani](nombre_victima) y vivo en [Estados Unidos](nacionalidad_victima)
+   - Soy una [mujer](genero_victima) de [55](edad_victima) años, vengo de [Ucrania](nacionalidad_victima)
+   - Soy un [chico](genero_victima) [colombiano](nacionalidad_victima) de [30](edad_victima) años
+   - Puedes llamarme como quieras, pero ten en cuenta que mi identidad de género es [fluida](genero_victima) y soy de [venezuela](nacionalidad_victima)
+   - Soy [Néstor](nombre_victima), tengo [18](edad_victima) años, [chico](genero_victima) y de [Senegal](nacionalidad_victima)
+   - Me llamo [Juana](nombre_victima), tengo [25](edad_victima) años, soy [mujer](genero_victima) y [española](nacionalidad_victima)
+   - Me llamo [Alfonso](nombre_victima), tengo [28](edad_victima) años, soy un [hombre](genero_victima) [español](nacionalidad_victima)
+   - [35](edad_victima)
+   - [Lucía](nombre_victima)
+   - [francés](nacionalidad_victima)
+   - soy [Maria](nombre_victima), tengo [23](edad_victima) años, [mujer](genero_victima) y [española](nacionalidad_victima)
+   - me llamo [Carlos](nombre_victima) y tengo [30](edad_victima)
+   - [Ana](nombre_victima), [22](edad_victima), [femenina](genero_victima)
+   - mi nombre es [Laura](nombre_victima)
+   - aquí está mi nombre: [Luis](nombre_victima)
+   - me dicen [Pablo](nombre_victima), tengo [28](edad_victima)
+   - soy un [hombre](genero_victima) llamado [José](nombre_victima), tengo [35](edad_victima) años
+   - [Clara](nombre_victima), [20](edad_victima), [no binaria](genero_victima), soy de [México](nacionalidad_victima)
+   - me puedes llamar [Sofía](nombre_victima), tengo [19](edad_victima) años y soy [argentina](nacionalidad_victima)
+   - [Miguel](nombre_victima) aquí, tengo [40](edad_victima) años y soy de [Chile](nacionalidad_victima)
+   - soy [David](nombre_victima), tengo [17](edad_victima) años y me identifico como [masculino](genero_victima)
+   - [Lucía](nombre_victima)
+   - [Diego](nombre_victima), [34](edad_victima)
+   - me llaman [Elena](nombre_victima)
+   - prefiero que me digas [Javier](nombre_victima), tengo [25](edad_victima)
+   - [Sara](nombre_victima), soy de [Colombia](nacionalidad_victima)
+   - mi edad es [27](edad_victima) y me llamo [Andrés](nombre_victima)
+   - vivo en [España](nacionalidad_victima) y me llamo [Carmen](nombre_victima)
+   - soy una [mujer](genero_victima) llamada [Isabel](nombre_victima)
+   - [Juan](nombre_victima), [29](edad_victima), [masculino](genero_victima), soy de [Argentina](nacionalidad_victima)
+
+
+
+- intent: inform_grupo_victima
+  examples: |
+   - Sí, soy parte de la comunidad [LGTBIQ+](colectivo_victima)
+   - Soy [gay](colectivo_victima)
+   - Soy parte del colectivo [trans](colectivo_victima) y [racializado](colectivo_victima)
+   - soy [lesbiana](colectivo_victima)
+   - [católico](colectivo_victima)
+   - la comunidad [evangelista](colectivo_victima)
+   - pertenezco al colectivo [feminista](colectivo_victima)
+   - soy [musulmán](colectivo_victima)
+   - No pertenezco a ningún colectivo
+   - no me siento identificada con ninguna comunidad
+   - Soy [judío](colectivo_victima)
+   - Formo parte de una comunidad [indígena](colectivo_victima)
+   - Me identifico como [afrolatino](colectivo_victima)
+   - Soy [gitano](colectivo_victima)
+   - Soy parte de una comunidad [migrante](colectivo_victima)
+   - bueno, ya te he dicho que soy de [Guinea Ecuatorial](colectivo_victima)...
+   - soy [árabe](colectivo_victima)
+   - soy activista y lucho por los derechos de las personas LGTBIQ+ porque soy uno de ellos.
+   - soy [migrante](colectivo_victima)
+   - soy [transexual](colectivo_victima)
+   - soy [mestizo](colectivo_victima)
+   - Soy [discapacitado](colectivo_victima)
+   - tengo una [discapacidad](colectivo_victima)
+   - tengo [diversidad funcional](colectivo_victima)
+   - tengo [movilidad reducida](colectivo_victima)
+   - tengo una [discapacidad intelectual](colectivo_victima)
+
+
+- intent: desafio_bot
+  examples: |
+   - ¿Para qué sirves?
+   - quién eres?
+   - que eres?
+   - para que te puedo utilizar?
+   - qué puedes hacer por mi?
+   - Cuál es tu función?
+   - para qué te han creado?
+   - cómo puedo usarte?
+   - Háblame de ti
+   - ¿Eres un robot?
+   - Eres una persona real?
+   - ¿Puedes explicarme cómo funcionas?
+   - De dónde has salido?
+   - ¿Eres humano?
+   - ¿Tienes emociones?
+
+
+- intent: inform_medio_digital
+  examples: |
+    - En las [redes sociales](medio_digital)
+    - A través de [internet](medio_digital)
+    - Pasó en un [foro en línea](medio_digital)
+    - Fue por [internet](medio_digital)
+    - Sucedio por las [redes sociales](medio_digital)
+
+- intent: inform_medio_fisico
+  examples: |
+    - Fue en la [vida real](medio_fisico)
+    - Sucedió en [Madrid](medio_fisico)
+    - Fue [en persona](medio_fisico)
+    - paso [cara a cara](medio_fisico)
+    - en [la calle](medio_fisico)
+
+- intent: inform_plataforma_redes
+  examples: |
+    - En [Instagram](plataforma_redes) 
+    - Fue por [WhatsApp](plataforma_redes)
+    - Todo pasó en [Facebook y Telegram](plataforma_redes)
+    - Me atacaron por [Twitter](plataforma_redes)
+    - Ocurrió en [un grupo de WhatsApp](plataforma_redes)
+    - Se publicó en [Instagram y luego en TikTok](plataforma_redes)
+    - [En redes, sobre todo en Twitter](plataforma_redes)
+    - Fue a través de [mensajes directos en Instagram](plataforma_redes)
+    - Me insultaron en TikTok durante un en vivo
+    - Todo comenzó con un comentario en YouTube
+    - Recibí amenazas por mensaje privado en Twitter
+    - Fue en Facebook, en un grupo cerrado
+    - Me etiquetaron en una publicación de Instagram con insultos
+    - La conversación empezó en Telegram y se volvió agresiva después en Instagram
+    - Alguien compartió mis fotos sin permiso en [Snapchat](plataforma_redes)
+    - Lo publicaron en un grupo de Facebook con burlas hacia mí
+    - Fue por mensajes de voz en [whatsapp](plataforma_redes)
+    - Se viralizó en [tiktok](plataforma_redes) y luego en [instagram](plataforma_redes)
+    - Me contactaron por [Messenger](plataforma_redes) para acosarme
+    - [messenger](plataforma_redes)
+    - Se organizó por un grupo de [Telegram](plataforma_redes).
+    - Lo vi en un hilo de [twitter](plataforma_redes).
+    - Me insultaron por [Discord](plataforma_redes).
+    - [discord](plataforma_redes)
+    - Fue a través de comentarios en [youtube](plataforma_redes).
+    - Me llegó por un reenvío en WhatsApp.
+    - Se burlaron de mí en una historia de Instagram.
+    - Lo compartieron en Reddit con comentarios ofensivos.
+    - [reddit](plataforma_redes)
+    - Me agredieron en una sala de audio en Twitter.
+    - Ocurrió en un canal público de [telegram](plataforma_redes).
+    - en [x](plataforma_redes)
+    - en [twitter](plataforma_redes)
+
+- intent: inform_num_agresores
+  examples: |
+    - Fue [una sola persona](num_agresores)
+    - [Solo uno](num_agresores)
+    - [Uno](num_agresores) 
+    - [Una persona actuó sola](num_agresores)
+
+
+- intent: inform_num_agresores_redes
+  examples: |
+    - Fue [una sola cuenta](num_agresores)
+    - [Una sola persona](num_agresores) lo publicó 
+    - Recuerdo solamente [1](num_agresores) cuenta
+
+
+- intent: inform_num_agresores_plural
+  examples: |
+    - Eran [dos](num_agresores)
+    - [2](num_agresores)
+    - Creo que fueron [tres aproximadamente](num_agresores)
+    - Había [al menos cuatro](num_agresores)
+    - [Más de cinco personas](num_agresores)
+    - No los conté bien, pero eran [varios](num_agresores)
+    - [Un grupo de tres o cuatro](num_agresores)
+  
+
+- intent: inform_num_agresores_redes_plural
+  examples: |
+    - [Varios usuarios](num_agresores) distintos  
+    - [Al menos cuatro cuentas](num_agresores) distintas
+    - Fueron [2](num_agresores) cuentas 
+    - Fueron [varias cuentas](num_agresores)
+  
+- intent: inform_cuenta_agresor_vinculacion_redes
+  examples: |
+    - Su usuario era [@odio123](cuenta_agresor_redes)
+    - [@sanguinario_rojo](cuenta_agresor_redes)
+    - En Facebook se llamaba [Juan Pérez](cuenta_agresor_redes)
+    - No recuerdo el nombre exacto
+    - Su perfil de Instagram decía [Pureza_Blanca](cuenta_agresor_redes)
+    - No recuerdo el nombre exacto, pero tenía una foto de un lobo
+    - Era algo como [MachoAlfa2023](cuenta_agresor_redes) en el foro
+    - Compartía memes de un [grupo homofóbico](vinculacion_extremista_agresor_redes)
+    - Publicaba [contenido neonazi](vinculacion_extremista_agresor_redes)
+    - No lo sé con seguridad
+    - no me fijé en su nombre
+    - Le daba like a [post de humor negro](vinculacion_extremista_agresor_redes)
+    - Seguía a [cuentas de contenido racista](vinculacion_extremista_agresor_redes)
+    - Sí, siempre publicaba [cosas racistas](vinculacion_extremista_agresor_redes)
+    - Una vez compartió [una amenaza contra migrantes](vinculacion_extremista_agresor_redes)
+    - Nunca lo había visto antes
+    - Su foto era [una bandera con un símbolo nazi](vinculacion_extremista_agresor_redes)
+    - El username tenía [la palabra "matarLGTB"](vinculacion_extremista_agresor_redes)
+    - No vi nada explícito
+    - En su biografía tenía [un 88](vinculacion_extremista_agresor_redes)
+    - Estas cuentas compartían a menudo tweets a favor de asociaciones como Desokupa o retuiteaban cosas de la falange española. En sus descripciones solían poner cosas como Arriba España
+
+- intent: relato_hechos
+  examples: |
+    - Todo empezó el viernes pasado cuando entré al grupo. Primero me mandó un mensaje privado diciéndome que era un gay de mierda. Y luego lo publicó en el muro del grupo con fotos de gays tachados con cruces rojas por encima
+    - Esa persona me escribió cosas como "lárgate de aquí, inmigrante de mierda" y mensajes parecidos
+    - Estabs bailando y de repente escuché que me decían cosas muy denigrantes, como: las mujeres como tú no servía para nada, ojalá os muráis todas
+    - Vi que usaba imágenes de símbolos de odio contra mi y etiquetó a otras personas para que se sumaran
+    - Me mandó una imagen con un mensaje amenazante y usaba insultos repetidamente
+    - Iba de la mano con mi pareja y un grupo de chicos empezó a gritarnos insultos homófobos
+    - Me empujaron en el metro solo por llevar una camiseta con la bandera trans
+    - Unos desconocidos me siguieron por la calle y me llamaron “maricón” varias veces
+    - Me agredieron físicamente al salir del local solo porque soy gitano
+    - Me escupieron y dijeron que los inmigrantes como yo no deberíamos estar aquí
+    - Mientras paseaba, un tipo me gritó insultos racistas y me tiró una lata
+    - Entré a una tienda y el dependiente me dijo que no atendían a “mi clase de gente”
+    - Unos vecinos me insultan cada vez que paso por delante de su casa por ser una mujer trans
+    - Me rociaron con agua desde un coche mientras me gritaban cosas por ser musulmana
+    - Fui a poner una denuncia y el policía cuestionó mi orientación sexual como si fuera un problema
+    - Estaba esperando el autobús cuando un grupo empezó a burlarse de mi forma de vestir
+    - Unos adolescentes me tiraron piedras mientras se reían y decían que los negros sobran aquí
+    - Me grabaron sin permiso en el trabajo y subieron el vídeo burlándose de mi acento
+    - Un hombre se acercó y me llamó “pederasta” por estar en un parque con mi hijo adoptivo
+    - En el instituto se ríen de mí y me golpean por ser una persona no binaria
+    - Estaba en una manifestación y un grupo comenzó a lanzar objetos y a gritar insultos antisemitas
+    - Me echaron del bar solo por tener una pareja del mismo sexo empujándonos todo el rato
+    - Me dijeron que mi religión no era bienvenida y que debía “irme a mi país”
+    - estaba yo paseando por el centro cuando un grupo de chicos empezó a llamarme ceviche
+    - Estaba esperando el autobús cuando un grupo de chicos empezó a burlarse de mí por estar en silla de ruedas. Me gritaron cosas como "inútil" y "estorbo", y se reían mientras lo hacían.
+    - Entré a una tienda y el dependiente se negó a atenderme. Dijo que no podía perder el tiempo conmigo y que mejor fuera acompañado de alguien "normal".
+    - Me negaron la entrada a un local porque dijeron que "molestaba la imagen del lugar". Fue muy humillante y no supe cómo reaccionar.
+    - En mi trabajo, mis compañeros constantemente hacen bromas sobre mi discapacidad visual. Me imitan o esconden cosas a propósito como "juego", pero me hacen sentir mal.
+    - Iba caminando por la calle con mis muletas y un desconocido me empujó y me llamó "inválido". No le hice nada, solo me estaba desplazando como cualquier otra persona.
+    - Vino la princesa Leonor a mi instituto y me hicieron una foto en la que parecía que la estaba mirando. Unos tuiteros subieron la foto a la red social sugiriendo que la estaba acosando, que era un delincuente y que también esperaban que la policía tuviera un francotirador apuntándome por si hacía algo, simplemente porque soy negro
+    - Lo que pasó fue que estaba yo paseando por la calle yendo a casa de unos amigos cuando empezaron a gritarme eh, tu, bujarra, maricón y cosas así feísimas. Me dio mucho miedo así que empecé a acelerar, pero me seguían por donde iba, hasta que me puse a correr y conseguí perderles de vista. Me dio bastante miedo
+    - Yo estaba buscando piso y encontré uno que me gustaba bastante. Hablé con la inmobiliaria para concertar una cita. Fueron muy amables en todo momento, pero cuando fui a ver el piso y les dije que era Alfonso, Joaquín me miró y me dijo que lo sentía pero que ya estaba alquilado. Cuando le recrimine que no me hubiera avisado y después de un buen rato discutiendo me dijo “A ver, que no es cosa mía es que bueno… a ver, es que los dueños no quieren a personas, como te diría, no nacionales en el piso, no es cosa nuestra, ya sabes… nosotros tenemos que respetar las decisiones de nuestros clientes”. Yo le expliqué que no era inmigrante, que había nacido en España, pero que mi madre era de Camerún, pero el siguió con el mismo discurso de que los inquilinos no querían alquilar a inmigrantes, etc
+
+
+- intent: relato_adicional_hechos_motivacion
+  examples: |
+    - También recuerdo que alguien más comentó apoyándolo
+    - Me olvidé de mencionar que antes ya me había insultado
+    - Algo más que me vino a la mente: el perfil tenía fotos de armas
+    - Otro detalle que no dije antes, me llegó un mensaje anónimo también
+    - No estoy segura si está relacionado, pero esa cuenta tenía más publicaciones ofensivas
+    - Creo que lo hizo porque soy trans
+    - Me atacó por ser latino
+    - Supongo que fue por mi orientación sexual
+    - Me insultó por ser mujer
+    - Me insultaron por llevar silla de ruedas
+    - claramente se rio de mi por mi discapacidad visual
+    - es obvio que me trataron asó por mi discapacidad 
+    - Era racismo claramente
+    - Lo hizo porque publiqué una foto con mi pareja
+    - No sé, tal vez porque tengo acento extranjero
+    - Fue porque hablé en árabe en un comentario
+    - no, eso es todo
+    - ya no me acuerdo de nada más, solo lo que te he contado antes
+    - no, ya no hay nada más
+    - me atacó por mi religión
+    - Lo hizo porque soy musulmana
+    - Fue por mis creencias religiosas
+    - Me insultaron por llevar velo
+    - Me dijeron cosas por ser judío
+    - Me pegaron por ser cristiana
+    - Supongo que fue porque pertenezco a otra religión
+    - Me agredieron por motivos religiosos
+    - empezaron a seguirme y a gritarme cosas que yo creo que eran xenófobas
+    - También recibí bullying por parte de muchas cuentas, y la verdad es que no sé si la motivación vino por mi color de piel, pero me hicieron sentir muy mal porque era gente a la que yo no conocía
+    - También me acuerdo de que me decían ven aquí maricón mientras se reían
+    - Fui claramente discriminado por mi color de piel
+    - Uno de ellos me escupió
+    - Me agredieron por mi religión
+    - Creo que fue porque uso pañuelo en la cabeza
+    - Lo hicieron por mis creencias religiosas
+    - Siento que fue por mi raza
+    - Me atacaron por ser inmigrante
+    - Fue un ataque motivado por odio hacia mi comunidad
+    - No hubo motivo claro, solo me insultaron
+    - No tengo idea de por qué me atacaron
+    - Me parece que fue por mi aspecto físico
+    - La agresión estuvo motivada por prejuicios
+    - No sé si hubo una razón específica
+    - No me quedó claro el motivo de la agresión
+    - No recuerdo más detalles, solo lo que ya te dije
+    - No quiero añadir nada más, ya he contado suficiente
+
+
+- intent: inform_fecha
+  examples: |
+    - Fue el 15 de marzo a las 20h
+    - Ocurrió el 25/12/2024 a mediodía
+    - Pasó el día del Orgullo a las 8
+    - Me ocurrió el 20 de abril
+    - Fue en Semana Santa
+    - No lo recuerdo bien, fue por la noche
+    - Fue el 5 de mayo por la tarde
+    - Sucedió el 1 de enero por la mañana
+    - Me ocurrió anoche
+    - Creo que pasó ayer al mediodía
+    - Fue el domingo pasado
+    - Ocurrió el fin de semana
+    - Fue el 30/03/2023
+    - Pasó el viernes a eso de las 7
+    - Fue en Nochebuena
+    - Me parece que ocurrió el día después de Año Nuevo
+    - Me pasó un jueves de febrero
+    - Fue en carnavales
+    - Todo ocurrió el lunes por la noche
+    - Fue alrededor de las 10 de la noche
+    - Creo que fue a mediados de junio
+    - Fue el mismo día de la manifestación
+    - Me pasó hace unos días
+    - Ocurrió hace un par de semanas
+    - Fue cuando salía del trabajo
+    - Sucedió el día del partido
+    - Ayerpor la noche
+    - Fue hace unos días
+    - El 3 de marzo
+    - A mediados de abril
+    - Desde la semana pasada
+    - Entre el lunes y el miércoles
+    - Hace como dos semanas
+    - Desde hace un mesestán mandando mensajes
+    - hace una semana
+    - hace dos semanas
+    - el martes de la semana pasada
+
+- intent: inform_localizacion
+  examples: |
+    - Fue en el [centro de Sevilla](localizacion)
+    - Ocurrió en la [Gran Vía de Madrid](localizacion)
+    - Me pasó en [un parque en Valencia](localizacion)
+    - Sucedió en [un local LGTBI en Barcelona](localizacion)
+    - Fue [cerca de una sinagoga en Madrid](localizacion)
+    - Estaba en [un local al lado del Doce de Octubre](localizacion)
+    - me encontraba [en mi instituto](localizacion)
+    - estaba [en la estación](localizacion) porque iba a coger un tren
+    - fue todo [en mi portal]
+    - me pillaron yendo por [la calle del Estaño]
+    - Fue en [una discoteca del centro](localizacion)
+    - Todo ocurrió en [la plaza del ayuntamiento](localizacion)
+    - Me pasó [en el metro](localizacion), en la línea 1
+    - Estaba [caminando por la calle Serrano](localizacion)
+    - Fue [en un parque cerca de mi casa](localizacion)
+    - Sucedió en [la biblioteca del campus](localizacion)
+    - Me lo encontré [en el centro comercial](localizacion)
+    - Estaba [en la puerta del instituto](localizacion)
+    - Estaba [saliendo de la facultad de derecho](localizacion)
+    - Me pasó [en un bar del barrio](localizacion)
+    - Fue [en el ascensor del edificio donde vivo](localizacion)
+    - Todo ocurrió [en mi vecindario](localizacion)
+    - Me pasó [en la estación de Atocha](localizacion)
+    - Fue [en una calle cerca del parque del Retiro](localizacion)
+    - Pasó [en el paso de peatones de la avenida](localizacion)
+    - Ocurrió [en el aparcamiento del centro comercial](localizacion)
+    - Fue [por la zona del polígono industrial](localizacion)
+    - Estaba [en la plaza del mercado](localizacion) cuando pasó
+    - Me pasó [en la parada del autobús](localizacion)
+    - Estaba [saliendo del gimnasio](localizacion)
+    - no me acuerdo muy bien de dónde fue
+    - no me di cuenta de donde pasó
+    - En [Madrid](localizacion), en [la Latina](localizacion) por la noche
+    - en [Barcelona](localizacion), en una [inmobiliaria](localizacion)
+
+- intent: inform_descripcion
+  examples: |
+    - Se llama Javier, pero le llaman Maqui, tiene unos 20 años más o menos
+    - Se llama Luis, es delgado y vive [cerca del parque](localizacion)
+    - Era un compañero de clase, rubio y con gafas
+    - Era la primera vez que le veía. Sé que era un trabajador de la inmobiliaria y que se llamaba Joaquín porque habíamos hablado por teléfono
+    - Era su secretaría. No la conocía y tampoco hizo nada. 
+    - No sé su nombre, pero trabajaba en la [tienda de la esquina](localizacion)
+    - Era mi exjefe, siempre vestía de traje azul
+    - Era un desconocido, alto y con tatuajes en los brazos
+    - Vive en [el edificio frente al mío](localizacion)
+    - Era un amigo de mi hermano, moreno y con barba
+    - Le decían El Moreno
+    - No sé su nombre real, pero le llamaban Tattoo
+    - En el barrio le decían El Chino por sus ojos rasgados
+    - Firmaba sus mensajes como [SoldadoArio](nombre_agresor)
+    - En el juego usaba [Destroyer88](nombre_agresor)
+    - Llevaba una pulsera con el nombre Dani
+    - Llevaba el uniforme que les hacen llevar en el trabajo, tenía gafas y un pendiente en la oreja
+    - Era alto y delgado, pero estaba fuerte. Ese día llevaba unos tejanos y una camiseta blanca. Tenía varios tatuajes, pero solo recuerdo que llevaba una especie de tribal en el brazo derecho
+    - Parecía de unos 40 años
+    - Era un chico joven, quizá 20
+    - Parecía un adolescente, quizá 16 o 17 años
+    - Un hombre mayor, como de 60 años
+    - Alto, piel morena y pelo rizado
+    - Bajo, con barba y gafas
+    - Llevaba el pelo teñido de rubio
+    - Bajito, con el pelo rapado y un piercing en la ceja
+    - Moreno, con una cicatriz en la mejilla izquierda
+    - Alto, musculoso y con tatuajes de serpientes en los brazos
+    - Delgado, con gafas de sol y una cojera al caminar
+    - Llevaba una [camiseta con una cruz esvástica](simbolismo)
+    - Tenía un tatuaje de una calavera en el brazo
+    - Iba de negro, con botas militares
+    - Llevaba una sudadera con capucha y un parche de una calavera
+    - Su chaqueta tenía bordado [White Power](simbolismo)
+    - Usaba un [anillo con un símbolo que parecía rúnico](simbolismo)
+    - Iba todo de negro, con botas militares y un cinturón de pinchos
+    - Hablaba con acento extranjero
+    - Llegó en una moto roja
+    - Hablaba con acento sudamericano y olía a alcohol
+    - Llegó en una [furgoneta blanca sin matrícula](caracteristicas_distintivas)
+    - Tenía una voz muy grave y fumaba cigarrillos mentolados
+    - Usaba un móvil con funda de los Lakers
+    - Sí, [insultó a un inmigrante en el parque](grupo_odio)
+    - [Subía memes racistas a Twitter](grupo_odio)
+    - [Nunca lo había visto hacer algo así](grupo_odio)
+    - [Antes había grabado videos insultando a personas trans](grupo_odio)
+    - [Siempre dejaba comentarios machistas en mis publicaciones](grupo_odio)
+    - [Una vez agredió a un compañero por su religión](grupo_odio)
+    - [Nunca lo vi hacer algo así](grupo_odio), pero tenía [fama de problemático](grupo_odio)
+    - Era parte de un [grupo neonazi](grupo_odio)
+    - No sé si pertenece a grupos de odio
+    - Que yo sepa no va con ningún grupo radical ni nada por el estilo
+    - Publicaba cosas de un [colectivo homofóbico](grupo_odio) en Facebook
+    - Compartía contenido de un [grupo antiinmigrante](grupo_odio) en Telegram
+    - Su perfil seguía varias [páginas de ideología supremacista](grupo_odio)
+    - No estoy seguro, pero tenía [símbolos raros](simbolismo) en la biografía
+    - Era miembro de un [foro donde hablaban mal de minorías](grupo_odio)
+    - No, solo eso
+    - Una mujer con pelo rojo que trabajaba en la cafetería.
+    - Un chico joven con mochila, estaba grabando con el móvil.
+    - No recuerdo bien, pero uno llevaba una camiseta de fútbol.
+    - Un chico con una cámara profesional que grababa todo
+    - Una mujer con uniforme de enfermera y pelo morado
+    - Dos adolescentes en patinete que se rieron de la situación.
+    - Un guardia de seguridad que estaba fumando cerca.
+    - escuché que le llamaban: el rubio
+    - no me se su nombre ni su apodo
+    - no tengo ni idea de su apodo ni de su nombre
+    - Eran dos chavales que estaban cerca pero no hicieron nada, se pusieron con el móvil
+    - Había un grupo de chicos al lado, pero no se metieron
+    - Dos personas vieron todo y no reaccionaron
+    - Un par de chavales estaban mirando y no dijeron nada
+    - Unos jóvenes grababan pero no ayudaron
+    - Había gente cerca, pero nadie intervino
+    - Vi a un chico con móvil, creo que grabó algo pero no estoy segura
+    - Algunas personas miraban desde lejos, sin intervenir
+    - Unos adolescentes estaban allí pero no hicieron nada
+    - Estaban al lado, pero solo se rieron y siguieron a lo suyo
+
+- intent: inform_descripcion_plural
+  examples: |
+    - Se llaman Daniel y Paco, parecian de unos 30 y 40 años
+    - sus nombres eran Gabriela, Lucía y Verónica y todas se veían menores de edad
+    - eran un grupo de personas que se llamaban Carlos, Julia, Ana, Mateo, David y Gregorio. Carlos parecía tener 25 años y los demás parecían más pequeños.
+    - a uno le decían El Barbas y al otro El Cuchillo
+    - se hacen llamar los rompe dientes
+    - les decían las Matadoras
+    - una de ellas era @PotraSalvaje, otra @Suprema y otra @Blanca_Paloma
+    - en las redes ponía que se llamaba "elexterminador_99"
+    - Uno parecía de unos 40 años y los demás de menos años
+    - Era un chico joven, quizá 20, después habia otra chica de unos 25 años, y otro chico de unos 35 años
+    - Parecían unos adolescentes, quizá 16 o 17 años los cinco
+    - un hombre mayor, como de 60 años y dos mujeres de unos 50 años
+    - eran chicas altos, con la piel morena y pelo liso
+    - Uno de ellos era bajo, con barba y gafas y el otro era de estatura media y muy delgado
+    - Los tres llevaban el pelo teñido de rubio con una estrella en rojo
+    - El chico era bajito, con el pelo rapado y un piercing en la ceja, una de las chicas era negra, con el pelo rizado y la otra era alta, con una pulsera de España y una mochila negra con un símbolo que no recuerdo bien
+    - Una chica morena, con una cicatriz en la mejilla izquierda y un chico rubio, con heridas en los nudillos
+    - los dos chicos eran altos, musculosos y con tatuajes de calaveras y huesos en los brazos 
+    - Una de ellas cojeaba al caminar, otra tenía gafas de sol y no le pude ver la cara, otra tenía una venda en la muñeca y la última tenía el pelo blanco
+    - los 4 tenían el mismo tatuaje: la cara de Franco con una aureola
+    - tenían camisetas con esvasticas
+    - pertenecian a grupos neonazis
+    - publicaban memes racistas
+    - todos fumaban puros con la bandera de España
+    - no, solo me acuerdo de lo que te he dicho ya 
+    - subían fotos raras de personas golpeadas a Instagram
+    - sus perfiles daban miedo, era todo muy turbio
+    - en sus cuentas habia muchos videos de sangre 
+    - No recuerdo muy bien, pero creo que todos llevaban camisetas del real madrid.
+    - Seguía a cuentas en contra de las personas trans
+
+
+- intent: informe_si
+  examples: |
+    - [Sí, quiero que redactes un informe](redactar_informe)
+    - [Sí](redactar_informe)
+    - [Sí](redactar_informe) lo quiero, por favor
+
+
+- intent: informe_no
+  examples: |
+    - [No, no quiero redactar un informe](redactar_informe)
+    - [No](redactar_informe)
+    - [No es necesario](redactar_informe)
+
+
+- intent: pregunta_fuera_dominio
+  examples: |
+    - ¿Cuál es el clima hoy?
+    - Cuéntame un chiste
+    - ¿Sabes cocinar paella?
+    - ¿Qué opinas del fútbol?
+    - ¿Cuándo es el próximo eclipse solar?
+    - ¿Puedes traducir algo al inglés?
+    - Tengo hambre, ¿qué me recomiendas comer?
+    - ¿Quién ganó la última Champions League?
+    - ¿Cuál es tu película favorita?
+    - ¿Me puedes dar la hora?
+    - Estoy aburrido, dime algo divertido
+    - ¿Sabes de astrología?
+    - ¿Puedes ayudarme con matemáticas?
+    - Recomiéndame una serie de Netflix
+    - ¿Qué signo zodiacal soy si nací en marzo?
+    - ¿Quién es el presidente de Argentina?
+    - ¿Cómo se hace un brownie?
+    - ¿Puedes hacer una imitación?
+    - ¿Cuál es tu color favorito?
+    - ¿Me puedes cantar algo?
+    - ¿Qué opinas de los videojuegos?
+    - ¿Puedes hacerme una carta astral?
+    - ¿Cuál es la capital de Australia?
+    - ¿Qué significa soñar con serpientes?
+    - ¿Puedes contarme una historia de terror?
+    - ¿Cómo me va a ir en el amor?
+    - ¿Cuál es el número de la suerte de hoy?
+    - ¿Puedes jugar conmigo?
+    - ¿Quién es tu creador?
+    - ¿Tienes novio o novia?
+    - ¿Qué tal tu día?
+    - ¿Sabes hacer trucos de magia?
+    - ¿Cuál es tu comida favorita?
+    - ¿Cuántos años tienes?
+    - ¿Puedes ayudarme a encontrar un trabajo?
+    - ¿Cuánto es 134 por 56?
+    - ¿Me puedes contar un dato curioso?
+    - ¿Sabes de inteligencia artificial?
+    - ¿Puedes recomendarme una app para meditar?
+    - ¿Qué canción está de moda?
+    - ¿Dónde puedo ir de vacaciones?
+    - ¿Puedes imitar a Yoda?
+    - ¿Cómo se dice 'hola' en japonés?
+    - ¿Qué edad tiene Messi?
+    - ¿Me puedes decir mi horóscopo?
+    - ¿Qué libro me recomiendas?
+    - ¿Puedes contarme un poema?
+    - ¿Qué pasaría si la Tierra dejara de girar?
+  
+- intent: no_quiero_responder
+  examples: |
+    - No quiero responder a esta pregunta
+    - no me siento cómodo contándote eso
+    - no voy a responder 
+    - quiero pasar a la siguiente pregunta
+    - Prefiero no decirlo
+    - No quiero compartir estos datos   
+    - no lo quiero decir
+    - no entiendo por qué necesitas esto
+    - eso es privado no lo quiero decir
+    - prefiero no decirlo
+    - No me acuerdo así que prefiero no responder
+    - No quiero responder
+    - No lo sé con seguridad, así que no quiero responder
+
+- intent: agradecer
+  examples: |
+    - gracias
+    - Muchas gracias
+    - te lo agradezco
+    - mil gracias
+    - agradezco tu ayuda
+    - gracias por la información
+    - gracias por tu apoyo
+    - gracias por escucharme
+    - estoy muy agradecida
+    - estoy muy agradecido
+    - gracias por estar ahí
+    - te doy las gracias
+    - muchísimas gracias
+    - de verdad, gracias
+    - se agradece mucho
+ 
+ 
+- intent: Comunidad_Madrid
+  examples: |
+    - Quiero ayuda en Madrid
+    - Estoy en Madrid
+    - Comunidad de Madrid
+    - Delegación Madrid
+    - Madrid
+ 
+- intent: Castilla_Leon
+  examples: |
+    - Castilla y León
+    - Estoy en León
+    - León
+    - Ayuda en Castilla y León
+    - Delegación en León
+ 
+- intent: Galicia
+  examples: |
+    - Galicia
+    - Lugo
+    - Estoy en Galicia
+    - Delegación de Lugo
+    - Quiero ayuda en Galicia
+ 
+- intent: Andalucia
+  examples: |
+    - Andalucía
+    - Málaga
+    - Jaén
+    - Cádiz
+    - Jerez de la Frontera
+    - Estoy en Andalucía
+    - Ayuda en el sur
+ 
+- intent: Valencia
+  examples: |
+    - Comunidad Valenciana
+    - Castellón
+    - Estoy en Castellón
+    - Ayuda en Comunidad Valenciana
+ 
+- intent: Canarias
+  examples: |
+    - Islas Canarias
+    - Tenerife
+    - Estoy en Canarias
+    - Ayuda en Tenerife
+ 
+- intent: Cataluña
+  examples: |
+    - Cataluña
+    - Barcelona
+    - Arenys de Mar
+    - Estoy en Cataluña
+    - Quiero ayuda en Cataluña
+ 
+- intent: no_recursos
+  examples: |
+    - no quiero recursos
+    - no me hacen falta los recursos
+    - no es necesario
+    - estoy bien, no quiero recursos
+    - no hace falta, ya sé yo dónde tengo que ir
+
+- intent: pregunta_proposito
+  examples: |
+    - para qué quieres estos datos?
+    - por qué me preguntas esto?
+    - para qué es este cuestionario?
+    - por qué tengo que decirte eso?
+    - ¿esto para qué es?
+    - ¿por qué quieres saber eso?
+    - ¿cuál es el propósito de esta pregunta?
+    - ¿esto es obligatorio?
+    - ¿qué sentido tiene esto?
+    - ¿para qué te sirve saber eso?
+    - ¿para qué me estás haciendo estas preguntas?
+    - ¿esto con qué objetivo lo preguntas?
+    - ¿por qué me haces esta pregunta?
+    - ¿es necesario que te diga eso?
+    - ¿con qué fin me preguntas esto?
+
+

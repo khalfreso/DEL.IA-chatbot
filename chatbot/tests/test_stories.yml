@@ -1,0 +1,134 @@
+#### This file contains tests to evaluate that your bot behaves as expected.
+#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+
+stories:
+- story: delito odio + toma testimonio
+  steps:
+  - user: |
+    intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - user: |
+     Quiero entender mejor qué se considera un delito de odio.
+    intent: delito_odio
+  - action: action_delito_odio
+  - user: |
+     Acompañarte en función de tu historia, si quieres contarme lo que ha sucedido.
+    intent: testimonio
+  - action: utter_testimonio
+
+- story: delito odio + pide recursos + toma testimonio
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - user: |
+     Quiero entender mejor qué se considera un delito de odio.
+    intent: delito_odio
+  - action: action_delito_odio
+  - user: |
+     Contarte cómo y dónde denunciar.
+    intent: recursos_denuncia
+  - action: action_recursos_denuncia
+  - user: |
+     Hablar de lo que ha pasado, te escucharé con atención y podré ayudarte más en función de tu historia.
+    intent: testimonio
+  - action: utter_testimonio
+
+
+- story: pide recursos + delito odio + toma testimonio
+  steps:
+  - intent: iniciar_sesion
+  - action: accion_inicio_sesion
+  - user: |
+     Quiero saber dónde y cómo puedo denunciar.
+    intent: recursos_denuncia
+  - action: action_recursos_denuncia
+  - user: |
+     Ayudarte a entender qué es un delito de odio.
+    intent: delito_odio
+  - action: action_delito_odio
+  - user: |
+     Acompañarte en función de tu historia, si quieres contarme lo que ha sucedido.
+    intent: testimonio
+  - action: utter_testimonio
+
+
+- story: toma testimonio
+  steps:
+  - intent: iniciar_sesion
+  - action: action_session_start
+  - user: |
+     Quiero contar lo que me pasó y recibir ayuda personalizada.
+    intent: testimonio
+  - action: utter_testimonio
+  - user: |
+     vamos allá!
+    intent: afirma
+  - action: utter_inform_perfil_victima1
+  - user: |
+     soy Juan y soy español
+    intent: inform_perfil_victima
+  - action: utter_inform_perfil_victima2
+  - user: |
+     no soy de ningún coletivo
+    intent: inform_grupo_victima
+  - action: utter_ubicar_medio
+
+
+- story: testimonio con duda
+  steps:
+  - intent: testimonio
+  - action: utter_testimonio
+  - user: |
+     ahora no
+    intent: niega
+  - action: utter_pedir_confirmacion
+  - user: |
+     venga vale
+    intent: afirma
+  - action: utter_inform_perfil_victima1
+  - user: |
+     me llamo Paula, tengo 25 años y soy colombiana
+    intent: inform_perfil_victima
+  - action: utter_inform_perfil_victima2
+  - user: |
+     soy lesbiana
+    intent: inform_grupo_victima
+  - action: utter_ubicar_medio
+
+
+- story: testimonio denegado
+  steps:
+  - intent: testimonio
+  - action: utter_testimonio
+  - user: |
+     paso
+    intent: niega
+  - action: utter_pedir_confirmacion
+  - user: |
+     te he dicho que no me apetece
+    intent: niega
+  - action: utter_despedida_concienciadora
+
+
+- story: saluda
+  steps:
+  - user: |
+     buenas tardes
+    intent: saludo
+  - action: utter_saludo
+
+
+- story: despide
+  steps:
+  - user: |
+     chao!
+    intent: despedida
+  - action: utter_despedida
+
+
+- story: desafío bot
+  steps:
+  - user: |
+     eres un bot?
+    intent: desafio_bot
+  - action: utter_soydelia

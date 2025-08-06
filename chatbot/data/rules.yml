@@ -1,0 +1,222 @@
+version: "3.1"
+
+rules:
+
+- rule: Iniciar sesion
+  steps:
+   - intent: iniciar_sesion
+   - action: accion_inicio_sesion
+
+- rule: Quiere cuestionario
+  steps:
+   - action: utter_testimonio
+   - intent: afirma
+   - action: utter_inform_perfil_victima1
+
+- rule: Rechaza cuestionario
+  steps:
+   - action: utter_testimonio
+   - intent: niega
+   - action: utter_pedir_confirmacion
+
+- rule: Confirma testimonio
+  steps:
+   - action: utter_pedir_confirmacion
+   - intent: afirma
+   - action: utter_inform_perfil_victima1
+
+- rule: Rechaza testimonio
+  steps:
+   - action: utter_pedir_confirmacion
+   - intent: niega
+   - action: utter_despedida_concienciadora
+
+- rule: Despídete cada vez que el usuario se despedida
+  steps:
+  - intent: despedida
+  - action: utter_despedida
+
+- rule: Di 'Soy DEL.IA' siempre que el usuario te desafíe
+  steps:
+  - intent: desafio_bot
+  - action: utter_soydelia
+
+- rule: establecer que hay un solo agresor
+  steps:
+  - intent: inform_num_agresores
+  - slot_was_set:
+    - num_agresores: uno
+  - action: utter_invita_relato_hechos
+
+- rule: establecer que hay varios agresores
+  steps:
+  - intent: inform_num_agresores_plural
+  - slot_was_set:
+    - num_agresores: varios
+  - action: utter_invita_relato_hechos
+
+- rule: sí había testigos 
+  steps:
+    - action: utter_testigos
+    - intent: afirma
+    - action: utter_relacion_testigo
+
+- rule: conoce a testigo
+  steps: 
+  - action: utter_relacion_testigo
+  - intent: afirma
+  - action: utter_denuncia_hechos
+
+- rule: no conoce testigo
+  steps: 
+  - action: utter_relacion_testigo
+  - intent: niega
+  - action: utter_info_testigos
+
+- rule: no había testigos
+  steps:
+    - action: utter_testigos
+    - intent: niega
+    - action: utter_denuncia_hechos
+
+- rule: conoce al agresor singular
+  steps: 
+  - action: utter_relacion_agresor
+  - intent: afirma
+  - action: utter_testigos
+
+- rule: conoce al agresor plural
+  steps: 
+  - action: utter_relacion_agresor_plural
+  - intent: afirma
+  - action: utter_testigos
+
+- rule: no conoce al agresor singular
+  steps:
+  - action: utter_relacion_agresor
+  - intent: niega
+  - action: utter_preguntar_detalles_iniciales_unico
+
+- rule: continuar descripcion
+  steps:
+  - action: utter_preguntar_descripcion_agresor
+  - intent: inform_descripcion
+  - action: utter_preguntar_caracteristicas_distintivas_grupo_odio
+
+- rule:  no conoce al agresor plural
+  steps:
+  - action: utter_relacion_agresor_plural
+  - intent: niega
+  - action: utter_preguntar_detalles_iniciales_plural
+
+- rule: describir al testigo
+  steps:
+  - action: utter_info_testigos
+  - intent: inform_descripcion
+  - action: utter_denuncia_hechos
+
+- rule: pasar a descripcion (agresor) a grupo odio
+  condition:
+  - slot_was_set:
+    - rol: agresor
+  steps:
+  - action: utter_preguntar_descripcion_agresor
+  - intent: inform_descripcion
+  - action: utter_preguntar_caracteristicas_distintivas_grupo_odio
+ 
+ 
+- rule: pasar de descripcion (testigo) a denuncia
+  condition:
+  - slot_was_set:
+    - rol: testigo
+  steps:
+  - action: utter_info_testigos
+  - intent: inform_descripcion
+  - action: utter_denuncia_hechos
+
+- rule: pasar de fecha (redes) a numero agresores
+  condition:
+  - slot_was_set:
+    - tipo_fecha: redes
+  steps:
+  - action: utter_fecha_redes
+  - intent: inform_fecha
+  - action: utter_num_agresores_redes
+ 
+- rule: pasar de fecha (persona) a localizacion
+  condition:
+  - slot_was_set:
+    - tipo_fecha: persona
+  steps:
+  - action: utter_pregunta_fecha_vida_real
+  - intent: inform_fecha
+  - action: utter_pregunta_localizacion
+
+- rule: no quiere responder
+  steps:
+  - intent: no_quiero_responder
+  - action: action_no_responde
+ 
+- rule: recursos madrid
+  steps:
+  - intent: Comunidad_Madrid
+  - action: utter_comunidad_madrid
+  - action: utter_despedida
+
+- rule: recursos castilla y Castilla leon 
+  steps:
+  - intent: Castilla_Leon
+  - action: utter_castilla_leon
+  - action: utter_despedida
+
+- rule: recursos Galicia
+  steps:
+  - intent: Galicia
+  - action: utter_galicia
+  - action: utter_despedida
+
+- rule: recursos Andalucia
+  steps: 
+  - intent: Andalucia
+  - action: utter_andalucia
+  - action: utter_despedida
+
+- rule: recursos comunidad valenciana
+  steps:
+  - intent: Valencia
+  - action: utter_comunidad_valenciana
+  - action: utter_despedida
+
+- rule: no quiere recursos
+  steps:
+  - intent: no_recursos
+  - action: utter_despedida
+ 
+- rule: recursos cataluña
+  steps:
+  - intent: Cataluña
+  - action: utter_cataluna
+  - action: utter_despedida
+
+- rule: recursos canarias
+  steps:
+  - intent: Canarias
+  - action: utter_islas_canarias
+  - action: utter_despedida
+
+- rule: Activar fallback cuando el NLU no entiende
+  steps:
+    - intent: pregunta_fuera_dominio
+    - action: action_fallback_con_reintento
+
+- rule: fallback con reintento
+  steps:
+    - intent: nlu_fallback
+    - action: action_fallback_con_reintento
+
+- rule: usuario pregunta que para qué le pregunta eso
+  steps:
+  - intent: pregunta_proposito
+  - action: utter_proposito_cuestionario
+
+ 

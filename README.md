@@ -232,12 +232,6 @@ git commit  # finaliza el merge
 
 > Consejo: trabaja con una rama propia y crea ramas nuevas cuando vayas a probar algo importante. Así evitas perder el trabajo estable que ya tenías.
 
-
-
-## 🛠️ Contribución
-
-Este proyecto es privado. Si formas parte del equipo, puedes colaborar mediante pull requests y revisiones de código.
-
 ---
 
 ## 📚 Licencia
